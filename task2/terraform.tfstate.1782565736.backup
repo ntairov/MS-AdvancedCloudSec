@@ -1,0 +1,1296 @@
+{
+  "version": 4,
+  "terraform_version": "1.14.8",
+  "serial": 29,
+  "lineage": "dba0dabf-77ae-3442-474f-e47c83a75242",
+  "outputs": {
+    "cloudtrail_bucket_name": {
+      "value": "siemlab123-cloudtrail-566a262c",
+      "type": "string"
+    },
+    "cloudwatch_log_group": {
+      "value": "/aws/cloudtrail/siemlab123",
+      "type": "string"
+    },
+    "eventbridge_rule_name": {
+      "value": "siemlab123-delete-user",
+      "type": "string"
+    },
+    "opensearch_endpoint": {
+      "value": "search-siemlab123-siem-ch7djymttesjqipgu45lx4gcba.eu-north-1.es.amazonaws.com",
+      "type": "string"
+    },
+    "sns_topic_arn": {
+      "value": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "562123137719",
+            "arn": "arn:aws:sts::562123137719:assumed-role/AWSReservedSSO_CE2025_StudentsPermissionSet_588174a3300a6ed6/Nazim_Tairov@student.itpu.uz",
+            "id": "562123137719",
+            "user_id": "AROAYFYJGMK32QRD6FX6R:Nazim_Tairov@student.itpu.uz"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudtrail",
+      "name": "account_trail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "advanced_event_selector": [],
+            "arn": "arn:aws:cloudtrail:eu-north-1:562123137719:trail/siemlab123-account-trail",
+            "cloud_watch_logs_group_arn": "arn:aws:logs:eu-north-1:562123137719:log-group:/aws/cloudtrail/siemlab123:*",
+            "cloud_watch_logs_role_arn": "arn:aws:iam::562123137719:role/siemlab123-CloudTrailCWRole",
+            "enable_log_file_validation": true,
+            "enable_logging": true,
+            "event_selector": [
+              {
+                "data_resource": [],
+                "exclude_management_event_sources": null,
+                "include_management_events": true,
+                "read_write_type": "All"
+              }
+            ],
+            "home_region": "eu-north-1",
+            "id": "arn:aws:cloudtrail:eu-north-1:562123137719:trail/siemlab123-account-trail",
+            "include_global_service_events": true,
+            "insight_selector": [],
+            "is_multi_region_trail": true,
+            "is_organization_trail": false,
+            "kms_key_id": "",
+            "name": "siemlab123-account-trail",
+            "s3_bucket_name": "siemlab123-cloudtrail-566a262c",
+            "s3_key_prefix": "",
+            "sns_topic_arn": "",
+            "sns_topic_name": "",
+            "tags": {
+              "Project": "siemlab123"
+            },
+            "tags_all": {
+              "Project": "siemlab123"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.cloudtrail",
+            "aws_iam_role.cloudtrail_to_cw",
+            "aws_iam_role_policy.cloudtrail_to_cw",
+            "aws_s3_bucket.cloudtrail",
+            "aws_s3_bucket_policy.cloudtrail",
+            "aws_s3_bucket_public_access_block.cloudtrail",
+            "data.aws_caller_identity.current",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_event_rule",
+      "name": "delete_user",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:events:eu-north-1:562123137719:rule/siemlab123-delete-user",
+            "description": "Detects AWS IAM DeleteUser API calls via CloudTrail.",
+            "event_bus_name": "default",
+            "event_pattern": "{\"detail\":{\"eventName\":[\"DeleteUser\"],\"eventSource\":[\"iam.amazonaws.com\"]},\"detail-type\":[\"AWS API Call via CloudTrail\"],\"source\":[\"aws.iam\"]}",
+            "force_destroy": false,
+            "id": "siemlab123-delete-user",
+            "is_enabled": true,
+            "name": "siemlab123-delete-user",
+            "name_prefix": "",
+            "role_arn": "",
+            "schedule_expression": "",
+            "state": "ENABLED",
+            "tags": null,
+            "tags_all": {}
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_event_target",
+      "name": "sns_alert",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "appsync_target": [],
+            "arn": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+            "batch_target": [],
+            "dead_letter_config": [],
+            "ecs_target": [],
+            "event_bus_name": "default",
+            "force_destroy": false,
+            "http_target": [],
+            "id": "siemlab123-delete-user-send-to-sns",
+            "input": "",
+            "input_path": "",
+            "input_transformer": [],
+            "kinesis_target": [],
+            "redshift_target": [],
+            "retry_policy": [],
+            "role_arn": "",
+            "rule": "siemlab123-delete-user",
+            "run_command_targets": [],
+            "sagemaker_pipeline_target": [],
+            "sqs_target": [],
+            "target_id": "send-to-sns"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudwatch_event_rule.delete_user",
+            "aws_sns_topic.security_alerts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_group",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:logs:eu-north-1:562123137719:log-group:/aws/cloudtrail/siemlab123",
+            "id": "/aws/cloudtrail/siemlab123",
+            "kms_key_id": "",
+            "log_group_class": "STANDARD",
+            "name": "/aws/cloudtrail/siemlab123",
+            "name_prefix": "",
+            "retention_in_days": 30,
+            "skip_destroy": false,
+            "tags": {
+              "Project": "siemlab123"
+            },
+            "tags_all": {
+              "Project": "siemlab123"
+            }
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_metric_filter",
+      "name": "delete_user_metric",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "siemlab123-DeleteUserMetric",
+            "log_group_name": "/aws/cloudtrail/siemlab123",
+            "metric_transformation": [
+              {
+                "default_value": "",
+                "dimensions": null,
+                "name": "DeleteUserCount",
+                "namespace": "SIEMLab",
+                "unit": "None",
+                "value": "1"
+              }
+            ],
+            "name": "siemlab123-DeleteUserMetric",
+            "pattern": "{ $.eventSource = \"iam.amazonaws.com\" \u0026\u0026 $.eventName = \"DeleteUser\" }"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.cloudtrail"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_log_subscription_filter",
+      "name": "cloudtrail_to_firehose",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "destination_arn": "arn:aws:firehose:eu-north-1:562123137719:deliverystream/siemlab123-ct-firehose",
+            "distribution": "ByLogStream",
+            "filter_pattern": "",
+            "id": "cwlsf-391098626",
+            "log_group_name": "/aws/cloudtrail/siemlab123",
+            "name": "siemlab123-ct-subscription",
+            "role_arn": "arn:aws:iam::562123137719:role/siemlab123-CWLogsFirehoseRole"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.cloudtrail",
+            "aws_iam_role.cloudwatch_to_firehose",
+            "aws_iam_role.firehose_to_opensearch",
+            "aws_kinesis_firehose_delivery_stream.cloudtrail_to_os",
+            "aws_opensearch_domain.siem",
+            "aws_s3_bucket.firehose_backup",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudwatch_metric_alarm",
+      "name": "delete_user_alarm",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "actions_enabled": true,
+            "alarm_actions": [
+              "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts"
+            ],
+            "alarm_description": "Alarm when the DeleteUser API is invoked.",
+            "alarm_name": "siemlab123-DeleteUserAlarm",
+            "arn": "arn:aws:cloudwatch:eu-north-1:562123137719:alarm:siemlab123-DeleteUserAlarm",
+            "comparison_operator": "GreaterThanOrEqualToThreshold",
+            "datapoints_to_alarm": 0,
+            "dimensions": null,
+            "evaluate_low_sample_count_percentiles": "",
+            "evaluation_periods": 1,
+            "extended_statistic": "",
+            "id": "siemlab123-DeleteUserAlarm",
+            "insufficient_data_actions": null,
+            "metric_name": "DeleteUserCount",
+            "metric_query": [],
+            "namespace": "SIEMLab",
+            "ok_actions": null,
+            "period": 60,
+            "statistic": "Sum",
+            "tags": null,
+            "tags_all": {},
+            "threshold": 1,
+            "threshold_metric_id": "",
+            "treat_missing_data": "notBreaching",
+            "unit": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_sns_topic.security_alerts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "cloudtrail_to_cw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::562123137719:role/siemlab123-CloudTrailCWRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-06-27T04:57:30Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "siemlab123-CloudTrailCWRole",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "siemlab123-CloudTrailCWRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": null,
+            "tags_all": {},
+            "unique_id": "AROAYFYJGMK3RGEB55FDH"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "cloudwatch_to_firehose",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::562123137719:role/siemlab123-CWLogsFirehoseRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"logs.eu-north-1.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-06-27T04:57:30Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "siemlab123-CWLogsFirehoseRole",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "siemlab123-CWLogsFirehoseRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": null,
+            "tags_all": {},
+            "unique_id": "AROAYFYJGMK32S3U4YR6C"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "firehose_to_opensearch",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::562123137719:role/siemlab123-FirehoseRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"firehose.amazonaws.com\"}}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2026-06-27T04:57:30Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "siemlab123-FirehoseRole",
+            "inline_policy": [],
+            "managed_policy_arns": [],
+            "max_session_duration": 3600,
+            "name": "siemlab123-FirehoseRole",
+            "name_prefix": "",
+            "path": "/",
+            "permissions_boundary": "",
+            "tags": null,
+            "tags_all": {},
+            "unique_id": "AROAYFYJGMK3YQ5R6DUXN"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "cloudtrail_to_cw",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "siemlab123-CloudTrailCWRole:siemlab123-CloudTrailCWPolicy",
+            "name": "siemlab123-CloudTrailCWPolicy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"logs:CreateLogStream\",\"logs:PutLogEvents\",\"logs:DescribeLogGroups\",\"logs:DescribeLogStreams\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:logs:eu-north-1:562123137719:log-group:/aws/cloudtrail/siemlab123:*\"}]}",
+            "role": "siemlab123-CloudTrailCWRole"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudwatch_log_group.cloudtrail",
+            "aws_iam_role.cloudtrail_to_cw"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "cloudwatch_to_firehose",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "siemlab123-CWLogsFirehoseRole:siemlab123-CWLogsFirehosePolicy",
+            "name": "siemlab123-CWLogsFirehosePolicy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"firehose:PutRecord\",\"firehose:PutRecordBatch\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:firehose:eu-north-1:562123137719:deliverystream/siemlab123-ct-firehose\"}]}",
+            "role": "siemlab123-CWLogsFirehoseRole"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.cloudwatch_to_firehose",
+            "aws_iam_role.firehose_to_opensearch",
+            "aws_kinesis_firehose_delivery_stream.cloudtrail_to_os",
+            "aws_opensearch_domain.siem",
+            "aws_s3_bucket.firehose_backup",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role_policy",
+      "name": "firehose_to_opensearch",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "siemlab123-FirehoseRole:siemlab123-FirehosePolicy",
+            "name": "siemlab123-FirehosePolicy",
+            "name_prefix": "",
+            "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Action\":[\"es:DescribeDomain\",\"es:DescribeDomains\",\"es:DescribeDomainConfig\",\"es:ESHttpPost\",\"es:ESHttpPut\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem\",\"arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem/*\"]},{\"Action\":[\"logs:PutLogEvents\"],\"Effect\":\"Allow\",\"Resource\":\"arn:aws:logs:eu-north-1:562123137719:log-group:/aws/kinesisfirehose/*:log-stream:*\"},{\"Action\":[\"s3:AbortMultipartUpload\",\"s3:GetBucketLocation\",\"s3:GetObject\",\"s3:ListBucket\",\"s3:ListBucketMultipartUploads\",\"s3:PutObject\"],\"Effect\":\"Allow\",\"Resource\":[\"arn:aws:s3:::siemlab123-firehose-backup-566a262c\",\"arn:aws:s3:::siemlab123-firehose-backup-566a262c/*\"]}]}",
+            "role": "siemlab123-FirehoseRole"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_iam_role.firehose_to_opensearch",
+            "aws_opensearch_domain.siem",
+            "aws_s3_bucket.firehose_backup",
+            "data.aws_caller_identity.current",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_kinesis_firehose_delivery_stream",
+      "name": "cloudtrail_to_os",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:firehose:eu-north-1:562123137719:deliverystream/siemlab123-ct-firehose",
+            "destination": "opensearch",
+            "destination_id": "destinationId-000000000001",
+            "elasticsearch_configuration": [],
+            "extended_s3_configuration": [],
+            "http_endpoint_configuration": [],
+            "iceberg_configuration": [],
+            "id": "arn:aws:firehose:eu-north-1:562123137719:deliverystream/siemlab123-ct-firehose",
+            "kinesis_source_configuration": [],
+            "msk_source_configuration": [],
+            "name": "siemlab123-ct-firehose",
+            "opensearch_configuration": [
+              {
+                "buffering_interval": 60,
+                "buffering_size": 5,
+                "cloudwatch_logging_options": [
+                  {
+                    "enabled": false,
+                    "log_group_name": "",
+                    "log_stream_name": ""
+                  }
+                ],
+                "cluster_endpoint": "",
+                "document_id_options": [],
+                "domain_arn": "arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem",
+                "index_name": "aws-cloudtrail",
+                "index_rotation_period": "OneDay",
+                "processing_configuration": [
+                  {
+                    "enabled": false,
+                    "processors": []
+                  }
+                ],
+                "retry_duration": 300,
+                "role_arn": "arn:aws:iam::562123137719:role/siemlab123-FirehoseRole",
+                "s3_backup_mode": "FailedDocumentsOnly",
+                "s3_configuration": [
+                  {
+                    "bucket_arn": "arn:aws:s3:::siemlab123-firehose-backup-566a262c",
+                    "buffering_interval": 300,
+                    "buffering_size": 5,
+                    "cloudwatch_logging_options": [
+                      {
+                        "enabled": false,
+                        "log_group_name": "",
+                        "log_stream_name": ""
+                      }
+                    ],
+                    "compression_format": "GZIP",
+                    "error_output_prefix": "",
+                    "kms_key_arn": "",
+                    "prefix": "",
+                    "role_arn": "arn:aws:iam::562123137719:role/siemlab123-FirehoseRole"
+                  }
+                ],
+                "type_name": "",
+                "vpc_config": []
+              }
+            ],
+            "opensearchserverless_configuration": [],
+            "redshift_configuration": [],
+            "server_side_encryption": [
+              {
+                "enabled": false,
+                "key_arn": "",
+                "key_type": "AWS_OWNED_CMK"
+              }
+            ],
+            "snowflake_configuration": [],
+            "splunk_configuration": [],
+            "tags": {
+              "Project": "siemlab123"
+            },
+            "tags_all": {
+              "Project": "siemlab123"
+            },
+            "timeouts": null,
+            "version_id": "1"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInVwZGF0ZSI6NjAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "aws_iam_role.firehose_to_opensearch",
+            "aws_opensearch_domain.siem",
+            "aws_s3_bucket.firehose_backup",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearch_domain",
+      "name": "siem",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_policies": null,
+            "advanced_options": {},
+            "advanced_security_options": [
+              {
+                "anonymous_auth_enabled": false,
+                "enabled": true,
+                "internal_user_database_enabled": true,
+                "master_user_options": [
+                  {
+                    "master_user_arn": "",
+                    "master_user_name": "siemadmin",
+                    "master_user_password": "ChangeMeNow123!"
+                  }
+                ]
+              }
+            ],
+            "arn": "arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem",
+            "auto_tune_options": [
+              {
+                "desired_state": "DISABLED",
+                "maintenance_schedule": [],
+                "rollback_on_disable": "NO_ROLLBACK",
+                "use_off_peak_window": false
+              }
+            ],
+            "cluster_config": [
+              {
+                "cold_storage_options": [
+                  {
+                    "enabled": false
+                  }
+                ],
+                "dedicated_master_count": 0,
+                "dedicated_master_enabled": false,
+                "dedicated_master_type": "",
+                "instance_count": 1,
+                "instance_type": "t3.small.search",
+                "multi_az_with_standby_enabled": false,
+                "node_options": [],
+                "warm_count": 0,
+                "warm_enabled": false,
+                "warm_type": "",
+                "zone_awareness_config": [],
+                "zone_awareness_enabled": false
+              }
+            ],
+            "cognito_options": [
+              {
+                "enabled": false,
+                "identity_pool_id": "",
+                "role_arn": "",
+                "user_pool_id": ""
+              }
+            ],
+            "dashboard_endpoint": "search-siemlab123-siem-ch7djymttesjqipgu45lx4gcba.eu-north-1.es.amazonaws.com/_dashboards",
+            "dashboard_endpoint_v2": null,
+            "domain_endpoint_options": [
+              {
+                "custom_endpoint": "",
+                "custom_endpoint_certificate_arn": "",
+                "custom_endpoint_enabled": false,
+                "enforce_https": true,
+                "tls_security_policy": "Policy-Min-TLS-1-2-2019-07"
+              }
+            ],
+            "domain_endpoint_v2_hosted_zone_id": "",
+            "domain_id": "562123137719/siemlab123-siem",
+            "domain_name": "siemlab123-siem",
+            "ebs_options": [
+              {
+                "ebs_enabled": true,
+                "iops": 3000,
+                "throughput": 125,
+                "volume_size": 10,
+                "volume_type": "gp3"
+              }
+            ],
+            "encrypt_at_rest": [
+              {
+                "enabled": true,
+                "kms_key_id": "arn:aws:kms:eu-north-1:562123137719:key/5b3a0852-3e28-44c2-9143-bb9dc1aab700"
+              }
+            ],
+            "endpoint": "search-siemlab123-siem-ch7djymttesjqipgu45lx4gcba.eu-north-1.es.amazonaws.com",
+            "endpoint_v2": null,
+            "engine_version": "OpenSearch_2.13",
+            "id": "arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem",
+            "ip_address_type": "ipv4",
+            "kibana_endpoint": "search-siemlab123-siem-ch7djymttesjqipgu45lx4gcba.eu-north-1.es.amazonaws.com/_plugin/kibana/",
+            "log_publishing_options": [],
+            "node_to_node_encryption": [
+              {
+                "enabled": true
+              }
+            ],
+            "off_peak_window_options": [
+              {
+                "enabled": true,
+                "off_peak_window": [
+                  {
+                    "window_start_time": [
+                      {
+                        "hours": 20,
+                        "minutes": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "snapshot_options": [
+              {
+                "automated_snapshot_start_hour": 0
+              }
+            ],
+            "software_update_options": [
+              {
+                "auto_software_update_enabled": false
+              }
+            ],
+            "tags": {
+              "Project": "siemlab123",
+              "Purpose": "SIEM"
+            },
+            "tags_all": {
+              "Project": "siemlab123",
+              "Purpose": "SIEM"
+            },
+            "timeouts": null,
+            "vpc_options": []
+          },
+          "sensitive_attributes": [
+            [
+              {
+                "type": "get_attr",
+                "value": "advanced_security_options"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "master_user_options"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "master_user_name"
+              }
+            ],
+            [
+              {
+                "type": "get_attr",
+                "value": "advanced_security_options"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "master_user_options"
+              },
+              {
+                "type": "index",
+                "value": {
+                  "value": 0,
+                  "type": "number"
+                }
+              },
+              {
+                "type": "get_attr",
+                "value": "master_user_password"
+              }
+            ]
+          ],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo3MjAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInVwZGF0ZSI6MTA4MDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_opensearch_domain_policy",
+      "name": "siem",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_policies": "{\"Statement\":[{\"Action\":\"es:*\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:es:eu-north-1:562123137719:domain/siemlab123-siem/*\"}],\"Version\":\"2012-10-17\"}",
+            "domain_name": "siemlab123-siem",
+            "id": "esd-policy-siemlab123-siem",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjo1NDAwMDAwMDAwMDAwLCJ1cGRhdGUiOjEwODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "aws_opensearch_domain.siem"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::siemlab123-cloudtrail-566a262c",
+            "bucket": "siemlab123-cloudtrail-566a262c",
+            "bucket_domain_name": "siemlab123-cloudtrail-566a262c.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "siemlab123-cloudtrail-566a262c.s3.eu-north-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "2672afad83149c44f04d3349d023cc961d9ba7de5dbb74c13a8d9cbc9c821b46",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3BAZG2TWCNX0D",
+            "id": "siemlab123-cloudtrail-566a262c",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "eu-north-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Project": "siemlab123",
+              "Purpose": "CloudTrailLogs"
+            },
+            "tags_all": {
+              "Project": "siemlab123",
+              "Purpose": "CloudTrailLogs"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "firehose_backup",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::siemlab123-firehose-backup-566a262c",
+            "bucket": "siemlab123-firehose-backup-566a262c",
+            "bucket_domain_name": "siemlab123-firehose-backup-566a262c.s3.amazonaws.com",
+            "bucket_prefix": "",
+            "bucket_regional_domain_name": "siemlab123-firehose-backup-566a262c.s3.eu-north-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": true,
+            "grant": [
+              {
+                "id": "2672afad83149c44f04d3349d023cc961d9ba7de5dbb74c13a8d9cbc9c821b46",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z3BAZG2TWCNX0D",
+            "id": "siemlab123-firehose-backup-566a262c",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "eu-north-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {
+              "Project": "siemlab123",
+              "Purpose": "FirehoseBackup"
+            },
+            "tags_all": {
+              "Project": "siemlab123",
+              "Purpose": "FirehoseBackup"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "siemlab123-cloudtrail-566a262c",
+            "id": "siemlab123-cloudtrail-566a262c",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetBucketAcl\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::siemlab123-cloudtrail-566a262c\",\"Sid\":\"AWSCloudTrailAclCheck\"},{\"Action\":\"s3:PutObject\",\"Condition\":{\"StringEquals\":{\"s3:x-amz-acl\":\"bucket-owner-full-control\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudtrail.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::siemlab123-cloudtrail-566a262c/AWSLogs/562123137719/*\",\"Sid\":\"AWSCloudTrailWrite\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.cloudtrail",
+            "aws_s3_bucket_public_access_block.cloudtrail",
+            "data.aws_caller_identity.current",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "siemlab123-cloudtrail-566a262c",
+            "id": "siemlab123-cloudtrail-566a262c",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.cloudtrail",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_public_access_block",
+      "name": "firehose_backup",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "block_public_acls": true,
+            "block_public_policy": true,
+            "bucket": "siemlab123-firehose-backup-566a262c",
+            "id": "siemlab123-firehose-backup-566a262c",
+            "ignore_public_acls": true,
+            "restrict_public_buckets": true
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.firehose_backup",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "siemlab123-cloudtrail-566a262c",
+            "expected_bucket_owner": "",
+            "id": "siemlab123-cloudtrail-566a262c",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": null
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.cloudtrail",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_server_side_encryption_configuration",
+      "name": "firehose_backup",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "siemlab123-firehose-backup-566a262c",
+            "expected_bucket_owner": "",
+            "id": "siemlab123-firehose-backup-566a262c",
+            "rule": [
+              {
+                "apply_server_side_encryption_by_default": [
+                  {
+                    "kms_master_key_id": "",
+                    "sse_algorithm": "AES256"
+                  }
+                ],
+                "bucket_key_enabled": null
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.firehose_backup",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_versioning",
+      "name": "cloudtrail",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "siemlab123-cloudtrail-566a262c",
+            "expected_bucket_owner": "",
+            "id": "siemlab123-cloudtrail-566a262c",
+            "mfa": null,
+            "versioning_configuration": [
+              {
+                "mfa_delete": "",
+                "status": "Enabled"
+              }
+            ]
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_s3_bucket.cloudtrail",
+            "random_id.suffix"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic",
+      "name": "security_alerts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "application_failure_feedback_role_arn": "",
+            "application_success_feedback_role_arn": "",
+            "application_success_feedback_sample_rate": 0,
+            "archive_policy": "",
+            "arn": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+            "beginning_archive_time": "",
+            "content_based_deduplication": false,
+            "delivery_policy": "",
+            "display_name": "",
+            "fifo_throughput_scope": "",
+            "fifo_topic": false,
+            "firehose_failure_feedback_role_arn": "",
+            "firehose_success_feedback_role_arn": "",
+            "firehose_success_feedback_sample_rate": 0,
+            "http_failure_feedback_role_arn": "",
+            "http_success_feedback_role_arn": "",
+            "http_success_feedback_sample_rate": 0,
+            "id": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+            "kms_master_key_id": "",
+            "lambda_failure_feedback_role_arn": "",
+            "lambda_success_feedback_role_arn": "",
+            "lambda_success_feedback_sample_rate": 0,
+            "name": "siemlab123-deleteuser-alerts",
+            "name_prefix": "",
+            "owner": "562123137719",
+            "policy": "{\"Id\":\"__default_policy_ID\",\"Statement\":[{\"Action\":[\"SNS:GetTopicAttributes\",\"SNS:SetTopicAttributes\",\"SNS:AddPermission\",\"SNS:RemovePermission\",\"SNS:DeleteTopic\",\"SNS:Subscribe\",\"SNS:ListSubscriptionsByTopic\",\"SNS:Publish\"],\"Condition\":{\"StringEquals\":{\"AWS:SourceOwner\":\"562123137719\"}},\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"*\"},\"Resource\":\"arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts\",\"Sid\":\"__default_statement_ID\"}],\"Version\":\"2008-10-17\"}",
+            "signature_version": 0,
+            "sqs_failure_feedback_role_arn": "",
+            "sqs_success_feedback_role_arn": "",
+            "sqs_success_feedback_sample_rate": 0,
+            "tags": {
+              "Project": "siemlab123"
+            },
+            "tags_all": {
+              "Project": "siemlab123"
+            },
+            "tracing_config": ""
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic_policy",
+      "name": "security_alerts",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+            "id": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts",
+            "owner": "562123137719",
+            "policy": "{\"Statement\":[{\"Action\":\"sns:Publish\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Resource\":\"arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts\",\"Sid\":\"AllowEventBridgePublish\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_sns_topic.security_alerts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_sns_topic_subscription",
+      "name": "email",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts:8ebecffe-8b92-4696-b23e-10541bd50a44",
+            "confirmation_timeout_in_minutes": 1,
+            "confirmation_was_authenticated": false,
+            "delivery_policy": "",
+            "endpoint": "nazim_tairov@student.itpu.uz",
+            "endpoint_auto_confirms": false,
+            "filter_policy": "",
+            "filter_policy_scope": "",
+            "id": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts:8ebecffe-8b92-4696-b23e-10541bd50a44",
+            "owner_id": "562123137719",
+            "pending_confirmation": true,
+            "protocol": "email",
+            "raw_message_delivery": false,
+            "redrive_policy": "",
+            "replay_policy": "",
+            "subscription_role_arn": "",
+            "topic_arn": "arn:aws:sns:eu-north-1:562123137719:siemlab123-deleteuser-alerts"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_sns_topic.security_alerts"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_id",
+      "name": "suffix",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "b64_std": "VmomLA==",
+            "b64_url": "VmomLA",
+            "byte_length": 4,
+            "dec": "1449797164",
+            "hex": "566a262c",
+            "id": "VmomLA",
+            "keepers": null,
+            "prefix": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}

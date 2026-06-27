@@ -379,7 +379,7 @@ resource "aws_cloudtrail" "account_trail" {
   is_multi_region_trail         = true
   enable_log_file_validation    = true
 
-  cloud_watch_logs_log_group_arn = "${aws_cloudwatch_log_group.cloudtrail.arn}:*"
+  cloud_watch_logs_group_arn = "${aws_cloudwatch_log_group.cloudtrail.arn}:*"
   cloud_watch_logs_role_arn      = aws_iam_role.cloudtrail_to_cw.arn
 
   event_selector {
@@ -422,10 +422,18 @@ resource "aws_sns_topic_subscription" "email" {
   topic_arn = aws_sns_topic.security_alerts.arn
   protocol  = "email"
   endpoint  = var.alert_email
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # -------------------------------------------------------------------
 # EventBridge rule: detect IAM DeleteUser via CloudTrail
+# NOTE: IAM is a global service — its CloudTrail events are delivered
+# to EventBridge in us-east-1 only. In this environment the SCP
+# restricts all operations to eu-north-1, so this rule cannot fire
+# for IAM events. Documented as a known limitation in SUBMISSION.md.
 # -------------------------------------------------------------------
 resource "aws_cloudwatch_event_rule" "delete_user" {
   name        = "${var.project_prefix}-delete-user"
