@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars and fill in real values.
+# terraform.tfvars is gitignored — never commit it.
+
+# Must be globally unique, lowercase letters/numbers only, max 23 chars
+# (OpenSearch domain name = "${project_prefix}-siem", max 28 chars total)
+project_prefix = "siemlab123"
+
+region  = "eu-north-1"
+profile = "itpu"
+
+opensearch_master_username = "siemadmin"
+opensearch_master_password = "ChangeMeNow123!"  # ≥8 chars, upper+lower+number+special
+
+alert_email = "nazim_tairov@student.itpu.uz"
+
+firehose_buffer_interval = 60
+firehose_buffer_size     = 5
