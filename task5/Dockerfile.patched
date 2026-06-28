@@ -1,0 +1,17 @@
+# Upgraded to supported LTS release — eliminates ubuntu:18.04 EOL CVEs
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3 \
+        openssl \
+        curl \
+        apache2 \
+        && rm -rf /var/lib/apt/lists/*
+
+RUN echo "Hello from patched container" > /var/www/html/index.html
+
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

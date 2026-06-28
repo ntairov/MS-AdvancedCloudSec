@@ -1,0 +1,337 @@
+
+Report Summary
+
+┌────────────────────────────────┬────────┬─────────────────┬─────────┐
+│             Target             │  Type  │ Vulnerabilities │ Secrets │
+├────────────────────────────────┼────────┼─────────────────┼─────────┤
+│ vuln-webapp:1.0 (ubuntu 22.04) │ ubuntu │       83        │    -    │
+└────────────────────────────────┴────────┴─────────────────┴─────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+vuln-webapp:1.0 (ubuntu 22.04)
+==============================
+Total: 83 (UNKNOWN: 0, LOW: 41, MEDIUM: 41, HIGH: 1, CRITICAL: 0)
+
+┌───────────────────────┬────────────────┬──────────┬──────────┬──────────────────────────────┬──────────────────────────────┬──────────────────────────────────────────────────────────────┐
+│        Library        │ Vulnerability  │ Severity │  Status  │      Installed Version       │        Fixed Version         │                            Title                             │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ bsdutils              │ CVE-2026-27456 │ MEDIUM   │ affected │ 1:2.37.2-4ubuntu3.5          │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ curl                  │ CVE-2026-11856 │          │          │ 7.81.0-1ubuntu1.24           │                              │ Successfully using libcurl to do a transfer to a specific    │
+│                       │                │          │          │                              │                              │ HTTP origin...                                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-11856                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8927  │          │          │                              │                              │ When reusing a libcurl handle for sequential transfers       │
+│                       │                │          │          │                              │                              │ driven by environment-variable proxy...                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8927                    │
+│                       ├────────────────┼──────────┤          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-12064 │ LOW      │          │                              │                              │ When a user invokes curl using a schemeless URL combined     │
+│                       │                │          │          │                              │                              │ with `--proto-default`...                                    │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-12064                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8286  │          │          │                              │                              │ A vulnerability exists where a new transfer that uses        │
+│                       │                │          │          │                              │                              │ STARTTLS to upgrade...                                       │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8286                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8458  │          │          │                              │                              │ libcurl might in some circumstances reuse the wrong          │
+│                       │                │          │          │                              │                              │ connection when asked to...                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8458                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8924  │          │          │                              │                              │ A flaw in curl's cookie parsing logic allows a malicious     │
+│                       │                │          │          │                              │                              │ HTTP server...                                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8924                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8932  │          │          │                              │                              │ libcurl would reuse a previously created connection even     │
+│                       │                │          │          │                              │                              │ when some mTLS config...                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8932                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-9547  │          │          │                              │                              │ When a libcurl-based application performs transfers via      │
+│                       │                │          │          │                              │                              │ `SCP://` or `SFTP://` and utilizes...                        │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-9547                    │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ gcc-12-base           │ CVE-2022-27943 │          │          │ 12.3.0-1ubuntu1~22.04.3      │                              │ binutils: libiberty/rust-demangle.c in GNU GCC 11.2 allows   │
+│                       │                │          │          │                              │                              │ stack exhaustion in demangle_const                           │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2022-27943                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libblkid1             │ CVE-2026-27456 │ MEDIUM   │          │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libc-bin              │ CVE-2026-4046  │          │          │ 2.35-0ubuntu3.13             │                              │ glibc: glibc: Denial of Service via iconv() function with    │
+│                       │                │          │          │                              │                              │ specific character sets...                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-4046                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-5435  │          │          │                              │                              │ glibc: glibc: Out-of-bounds write via TSIG record processing │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-5435                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-6238  │          │          │                              │                              │ glibc: glibc: Application crash or uninitialized memory read │
+│                       │                │          │          │                              │                              │ via crafted DNS response...                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-6238                    │
+├───────────────────────┼────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libc6                 │ CVE-2026-4046  │          │          │                              │                              │ glibc: glibc: Denial of Service via iconv() function with    │
+│                       │                │          │          │                              │                              │ specific character sets...                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-4046                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-5435  │          │          │                              │                              │ glibc: glibc: Out-of-bounds write via TSIG record processing │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-5435                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-6238  │          │          │                              │                              │ glibc: glibc: Application crash or uninitialized memory read │
+│                       │                │          │          │                              │                              │ via crafted DNS response...                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-6238                    │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libcurl4              │ CVE-2026-11856 │          │          │ 7.81.0-1ubuntu1.24           │                              │ Successfully using libcurl to do a transfer to a specific    │
+│                       │                │          │          │                              │                              │ HTTP origin...                                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-11856                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8927  │          │          │                              │                              │ When reusing a libcurl handle for sequential transfers       │
+│                       │                │          │          │                              │                              │ driven by environment-variable proxy...                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8927                    │
+│                       ├────────────────┼──────────┤          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-12064 │ LOW      │          │                              │                              │ When a user invokes curl using a schemeless URL combined     │
+│                       │                │          │          │                              │                              │ with `--proto-default`...                                    │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-12064                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8286  │          │          │                              │                              │ A vulnerability exists where a new transfer that uses        │
+│                       │                │          │          │                              │                              │ STARTTLS to upgrade...                                       │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8286                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8458  │          │          │                              │                              │ libcurl might in some circumstances reuse the wrong          │
+│                       │                │          │          │                              │                              │ connection when asked to...                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8458                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8924  │          │          │                              │                              │ A flaw in curl's cookie parsing logic allows a malicious     │
+│                       │                │          │          │                              │                              │ HTTP server...                                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8924                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-8932  │          │          │                              │                              │ libcurl would reuse a previously created connection even     │
+│                       │                │          │          │                              │                              │ when some mTLS config...                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-8932                    │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-9547  │          │          │                              │                              │ When a libcurl-based application performs transfers via      │
+│                       │                │          │          │                              │                              │ `SCP://` or `SFTP://` and utilizes...                        │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-9547                    │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libexpat1             │ CVE-2025-66382 │ MEDIUM   │          │ 2.4.7-1ubuntu0.7             │                              │ libexpat: libexpat: Denial of service via crafted file       │
+│                       │                │          │          │                              │                              │ processing                                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2025-66382                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libgcc-s1             │ CVE-2022-27943 │ LOW      │          │ 12.3.0-1ubuntu1~22.04.3      │                              │ binutils: libiberty/rust-demangle.c in GNU GCC 11.2 allows   │
+│                       │                │          │          │                              │                              │ stack exhaustion in demangle_const                           │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2022-27943                   │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libgcrypt20           │ CVE-2026-41989 │ MEDIUM   │ fixed    │ 1.9.4-3ubuntu3               │ 1.9.4-3ubuntu3.2             │ Libgcrypt: Libgcrypt: Denial of Service and buffer overflow  │
+│                       │                │          │          │                              │                              │ via crafted ECDH ciphertext...                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-41989                   │
+│                       ├────────────────┼──────────┼──────────┤                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2024-2236  │ LOW      │ affected │                              │                              │ libgcrypt: vulnerable to Marvin Attack                       │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2024-2236                    │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libgnutls30           │ CVE-2026-33845 │ MEDIUM   │ fixed    │ 3.7.3-4ubuntu1.8             │ 3.7.3-4ubuntu1.9             │ gnutls: GnuTLS: Denial of Service via DTLS zero-length       │
+│                       │                │          │          │                              │                              │ fragment                                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-33845                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-33846 │          │          │                              │                              │ gnutls: GnuTLS: Denial of Service via heap buffer overflow   │
+│                       │                │          │          │                              │                              │ in DTLS handshake...                                         │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-33846                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-3832  │          │          │                              │                              │ gnutls: gnutls: Security bypass allows acceptance of revoked │
+│                       │                │          │          │                              │                              │ server certificates via crafted...                           │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-3832                    │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-3833  │          │          │                              │                              │ gnutls: GnuTLS: Policy bypass due to case-sensitive          │
+│                       │                │          │          │                              │                              │ nameConstraints comparison                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-3833                    │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42009 │          │          │                              │                              │ gnutls: gnutls: Denial of Service via DTLS packet reordering │
+│                       │                │          │          │                              │                              │ vulnerability                                                │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42009                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42010 │          │          │                              │                              │ gnutls: gnutls: Authentication Bypass via NUL Character in   │
+│                       │                │          │          │                              │                              │ Username                                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42010                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42011 │          │          │                              │                              │ gnutls: gnutls: Security bypass due to incorrect name        │
+│                       │                │          │          │                              │                              │ constraint handling                                          │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42011                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42012 │          │          │                              │                              │ gnutls: gnutls: Certificate validation bypass due to         │
+│                       │                │          │          │                              │                              │ improper handling of URI and...                              │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42012                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42013 │          │          │                              │                              │ gnutls: gnutls: Certificate validation bypass due to         │
+│                       │                │          │          │                              │                              │ oversized Subject Alternative Name                           │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42013                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42014 │          │          │                              │                              │ gnutls: gnutls: Use-after-free in                            │
+│                       │                │          │          │                              │                              │ gnutls_pkcs11_token_set_pin                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42014                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42015 │          │          │                              │                              │ gnutls: gnutls: Memory corruption due to off-by-one error in │
+│                       │                │          │          │                              │                              │ PKCS#12 bag handling...                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42015                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-5260  │          │          │                              │                              │ gnutls: gnutls: Information disclosure via heap overread in  │
+│                       │                │          │          │                              │                              │ RSA key exchange                                             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-5260                    │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libicu70              │ CVE-2025-5222  │ LOW      │ affected │ 70.1-2                       │                              │ icu: Stack buffer overflow in the SRBRoot::addTag function   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2025-5222                    │
+├───────────────────────┼────────────────┤          ├──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ liblzma5              │ CVE-2026-34743 │          │ fixed    │ 5.2.5-2ubuntu1               │ 5.2.5-2ubuntu1.1             │ xz: XZ Utils: Denial of Service via buffer overflow in index │
+│                       │                │          │          │                              │                              │ decoding...                                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-34743                   │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libmount1             │ CVE-2026-27456 │ MEDIUM   │ affected │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libncurses6           │ CVE-2023-50495 │ LOW      │          │ 6.3-2ubuntu0.1               │                              │ ncurses: segmentation fault via _nc_wrap_entry()             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-50495                   │
+├───────────────────────┤                │          │          │                              ├──────────────────────────────┤                                                              │
+│ libncursesw6          │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libpcre2-8-0          │ CVE-2022-41409 │          │          │ 10.39-3ubuntu0.1             │                              │ pcre2: negative repeat value in a pcre2test subject line     │
+│                       │                │          │          │                              │                              │ leads to inifinite...                                        │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2022-41409                   │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libpcre3              │ CVE-2017-11164 │          │          │ 2:8.39-13ubuntu0.22.04.1     │                              │ pcre: OP_KETRMAX feature in the match function in            │
+│                       │                │          │          │                              │                              │ pcre_exec.c                                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2017-11164                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libpython3.10-minimal │ CVE-2026-2297  │ MEDIUM   │          │ 3.10.12-1~22.04.15           │                              │ cpython: CPython: Logging Bypass in Legacy .pyc File         │
+│                       │                │          │          │                              │                              │ Handling                                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-2297                    │
+├───────────────────────┤                │          │          │                              ├──────────────────────────────┤                                                              │
+│ libpython3.10-stdlib  │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libsmartcols1         │ CVE-2026-27456 │          │          │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libssl3               │ CVE-2026-45447 │ HIGH     │ fixed    │ 3.0.2-0ubuntu1.23            │ 3.0.2-0ubuntu1.25            │ openssl: Heap Use-After-Free in OpenSSL PKCS7_verify()       │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-45447                   │
+│                       ├────────────────┼──────────┤          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-34182 │ MEDIUM   │          │                              │                              │ openssl: CMS AuthEnvelopedData Processing May Accept Forged  │
+│                       │                │          │          │                              │                              │ Messages                                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-34182                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-45445 │          │          │                              │                              │ openssl: AES-OCB IV Ignored on EVP_Cipher() Path             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-45445                   │
+│                       ├────────────────┼──────────┤          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-34180 │ LOW      │          │                              │                              │ openssl: OpenSSL: Heap buffer over-read in ASN.1 decoding    │
+│                       │                │          │          │                              │                              │ can lead to denial...                                        │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-34180                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42766 │          │          │                              │                              │ openssl: Possible NULL Dereference in Password-Based CMS     │
+│                       │                │          │          │                              │                              │ Decryption                                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42766                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42767 │          │          │                              │                              │ openssl: NULL Pointer Dereference in CRMF EncryptedValue     │
+│                       │                │          │          │                              │                              │ Decryption                                                   │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42767                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-42770 │          │          │                              │                              │ openssl: FFC-DH Peer Validation Uses Attacker-Supplied q     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-42770                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-45446 │          │          │                              │                              │ openssl: Incorrect Tag Processing for Empty Messages in      │
+│                       │                │          │          │                              │                              │ AES-GCM-SIV and AES-SIV modes...                             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-45446                   │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-7383  │          │          │                              │                              │ openssl: OpenSSL: Heap buffer overflow due to signed integer │
+│                       │                │          │          │                              │                              │ overflow in Unicode...                                       │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-7383                    │
+│                       ├────────────────┤          │          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-9076  │          │          │                              │                              │ openssl: OpenSSL: Denial of Service due to heap              │
+│                       │                │          │          │                              │                              │ out-of-bounds read in CMS...                                 │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-9076                    │
+├───────────────────────┼────────────────┤          ├──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libstdc++6            │ CVE-2022-27943 │          │ affected │ 12.3.0-1ubuntu1~22.04.3      │                              │ binutils: libiberty/rust-demangle.c in GNU GCC 11.2 allows   │
+│                       │                │          │          │                              │                              │ stack exhaustion in demangle_const                           │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2022-27943                   │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libsystemd0           │ CVE-2026-40226 │ MEDIUM   │ fixed    │ 249.11-0ubuntu3.20           │ 249.11-0ubuntu3.21           │ systemd: systemd nspawn: Escape-to-host action via crafted   │
+│                       │                │          │          │                              │                              │ config file                                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-40226                   │
+│                       ├────────────────┼──────────┤          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2023-7008  │ LOW      │          │                              │                              │ systemd-resolved: Unsigned name response in signed zone is   │
+│                       │                │          │          │                              │                              │ not refused when DNSSEC=yes...                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-7008                    │
+│                       ├────────────────┤          ├──────────┤                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-40228 │          │ affected │                              │                              │ systemd: systemd-journald: Unintended output to user         │
+│                       │                │          │          │                              │                              │ terminals via logger command                                 │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-40228                   │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libtinfo6             │ CVE-2023-50495 │          │          │ 6.3-2ubuntu0.1               │                              │ ncurses: segmentation fault via _nc_wrap_entry()             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-50495                   │
+├───────────────────────┼────────────────┼──────────┼──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libudev1              │ CVE-2026-40226 │ MEDIUM   │ fixed    │ 249.11-0ubuntu3.20           │ 249.11-0ubuntu3.21           │ systemd: systemd nspawn: Escape-to-host action via crafted   │
+│                       │                │          │          │                              │                              │ config file                                                  │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-40226                   │
+│                       ├────────────────┼──────────┤          │                              │                              ├──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2023-7008  │ LOW      │          │                              │                              │ systemd-resolved: Unsigned name response in signed zone is   │
+│                       │                │          │          │                              │                              │ not refused when DNSSEC=yes...                               │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-7008                    │
+│                       ├────────────────┤          ├──────────┤                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-40228 │          │ affected │                              │                              │ systemd: systemd-journald: Unintended output to user         │
+│                       │                │          │          │                              │                              │ terminals via logger command                                 │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-40228                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libuuid1              │ CVE-2026-27456 │ MEDIUM   │          │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ libzstd1              │ CVE-2022-4899  │ LOW      │          │ 1.4.8+dfsg-3build1           │                              │ zstd: mysql: buffer overrun in util.c                        │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2022-4899                    │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ login                 │ CVE-2023-29383 │          │          │ 1:4.8.1-2ubuntu2.2           │                              │ shadow: Improper input validation in shadow-utils package    │
+│                       │                │          │          │                              │                              │ utility chfn                                                 │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-29383                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2024-56433 │          │          │                              │                              │ shadow-utils: Default subordinate ID configuration in        │
+│                       │                │          │          │                              │                              │ /etc/login.defs could lead to compromise                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2024-56433                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ mount                 │ CVE-2026-27456 │ MEDIUM   │          │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ ncurses-base          │ CVE-2023-50495 │ LOW      │          │ 6.3-2ubuntu0.1               │                              │ ncurses: segmentation fault via _nc_wrap_entry()             │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-50495                   │
+├───────────────────────┤                │          │          │                              ├──────────────────────────────┤                                                              │
+│ ncurses-bin           │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ passwd                │ CVE-2023-29383 │          │          │ 1:4.8.1-2ubuntu2.2           │                              │ shadow: Improper input validation in shadow-utils package    │
+│                       │                │          │          │                              │                              │ utility chfn                                                 │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2023-29383                   │
+│                       ├────────────────┤          │          │                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2024-56433 │          │          │                              │                              │ shadow-utils: Default subordinate ID configuration in        │
+│                       │                │          │          │                              │                              │ /etc/login.defs could lead to compromise                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2024-56433                   │
+├───────────────────────┼────────────────┼──────────┤          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ python3.10            │ CVE-2026-2297  │ MEDIUM   │          │ 3.10.12-1~22.04.15           │                              │ cpython: CPython: Logging Bypass in Legacy .pyc File         │
+│                       │                │          │          │                              │                              │ Handling                                                     │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-2297                    │
+├───────────────────────┤                │          │          │                              ├──────────────────────────────┤                                                              │
+│ python3.10-minimal    │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+│                       │                │          │          │                              │                              │                                                              │
+├───────────────────────┼────────────────┤          │          ├──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ tar                   │ CVE-2025-45582 │          │          │ 1.34+dfsg-1ubuntu0.1.22.04.2 │                              │ tar: Tar path traversal                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2025-45582                   │
+│                       ├────────────────┤          ├──────────┤                              ├──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│                       │ CVE-2026-5704  │          │ fixed    │                              │ 1.34+dfsg-1ubuntu0.1.22.04.3 │ tar: tar: Hidden file injection via crafted archives         │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-5704                    │
+├───────────────────────┼────────────────┤          ├──────────┼──────────────────────────────┼──────────────────────────────┼──────────────────────────────────────────────────────────────┤
+│ util-linux            │ CVE-2026-27456 │          │ affected │ 2.37.2-4ubuntu3.5            │                              │ util-linux: TOCTOU in the mount program when setting up loop │
+│                       │                │          │          │                              │                              │ devices                                                      │
+│                       │                │          │          │                              │                              │ https://avd.aquasec.com/nvd/cve-2026-27456                   │
+└───────────────────────┴────────────────┴──────────┴──────────┴──────────────────────────────┴──────────────────────────────┴──────────────────────────────────────────────────────────────┘

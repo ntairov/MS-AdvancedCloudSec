@@ -1,0 +1,20 @@
+# Deliberately outdated base image
+FROM ubuntu:18.04
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install packages with known vulnerabilities
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        python3.6 \
+        openssl \
+        curl \
+        apache2 \
+        libssl1.1 \
+        && rm -rf /var/lib/apt/lists/*
+
+RUN echo "Hello from vulnerable container" > /var/www/html/index.html
+
+EXPOSE 80
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
