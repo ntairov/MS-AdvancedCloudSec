@@ -8,3 +8,4 @@
 **/lambda/bootstrap
 **/lambda/function.zip
 .DS_Store
+**/tfplan
