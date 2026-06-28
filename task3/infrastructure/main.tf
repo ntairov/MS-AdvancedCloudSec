@@ -133,7 +133,7 @@ resource "aws_iam_instance_profile" "jenkins_profile" {
 # -------------------------------------------------------------------
 resource "aws_security_group" "jenkins_sg" {
   name        = "${var.project_tag}-jenkins-sg"
-  description = "Jenkins controller — inbound via SSM port-forward only."
+  description = "Jenkins controller - inbound via SSM port-forward only."
   vpc_id      = data.aws_vpc.default.id
 
   egress {
@@ -143,15 +143,12 @@ resource "aws_security_group" "jenkins_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  dynamic "ingress" {
-    for_each = var.key_name != "" ? [1] : []
-    content {
-      description = "SSH access (optional)"
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = [var.allowed_ssh_cidr]
-    }
+  ingress {
+    description = "SSH for EC2 Instance Connect"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = { Name = "${var.project_tag}-jenkins-sg" }
@@ -169,6 +166,11 @@ resource "aws_instance" "jenkins" {
   vpc_security_group_ids      = [aws_security_group.jenkins_sg.id]
   key_name                    = var.key_name != "" ? var.key_name : null
   user_data                   = file("${path.module}/userdata.sh")
+
+  root_block_device {
+    volume_size = 20
+    volume_type = "gp3"
+  }
 
   tags = {
     Name        = "${var.project_tag}-jenkins"
