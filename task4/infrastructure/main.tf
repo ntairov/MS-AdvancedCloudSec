@@ -90,6 +90,7 @@ resource "aws_iam_role_policy" "jenkins_inline_policy" {
           "iam:DeleteUser",
           "iam:TagUser",
           "iam:UntagUser",
+          "iam:DeleteLoginProfile",
           "iam:CreatePolicy",
           "iam:DeletePolicy",
           "iam:CreatePolicyVersion",
